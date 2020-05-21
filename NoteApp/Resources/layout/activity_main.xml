@@ -14,6 +14,8 @@
     <android.support.design.widget.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Enter Note Title"
+        android:gravity="center"
         android:id="@+id/noteChoiceText" />
     
     </android.support.design.widget.TextInputLayout>

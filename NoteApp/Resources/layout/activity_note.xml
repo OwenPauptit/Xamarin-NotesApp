@@ -41,7 +41,7 @@
             android:id="@+id/editBody"
             android:gravity="top"
             android:textSize="18sp"
-            android:text="Enter body">
+            android:hint="Enter body">
 
         </android.support.design.widget.TextInputEditText>
     

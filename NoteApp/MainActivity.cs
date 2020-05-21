@@ -44,6 +44,7 @@ namespace NoteApp
                     File.AppendAllText(MakeFilePath(NOTELIST), "\n");
                     File.AppendAllText(MakeFilePath(NOTELIST), title.Text);
                 }
+                LaunchMainActivity();
             }
         }
 
@@ -77,16 +78,19 @@ namespace NoteApp
             return notes;
         }
 
-        public void ClearNotes()
-        {
-            File.WriteAllText(MakeFilePath(NOTELIST), "");
-        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            // Set our view from the "main" layout resource
+
+            LaunchMainActivity();
+
+        }
+
+        private void LaunchMainActivity()
+        {
+
             SetContentView(Resource.Layout.activity_main);
 
             noteChoice = FindViewById<TextInputEditText>(Resource.Id.noteChoiceText);
@@ -98,9 +102,6 @@ namespace NoteApp
 
             noteListView.Adapter = adapter;
             noteListView.ItemClick += noteListView_ItemClick;
-
-            ClearNotes();
-
         }
 
         private void noteListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
