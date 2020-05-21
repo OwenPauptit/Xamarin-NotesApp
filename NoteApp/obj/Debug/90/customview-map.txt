@@ -1,9 +1,12 @@
 adaptive-icon;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 adaptive-icon;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
+android.support.design.widget.TextInputEditText;obj\Debug\90\res\layout\activity_main.xml
 android.support.design.widget.TextInputEditText;obj\Debug\90\res\layout\activity_note.xml
+android.support.design.widget.TextInputLayout;obj\Debug\90\res\layout\activity_main.xml
 android.support.design.widget.TextInputLayout;obj\Debug\90\res\layout\activity_note.xml
 background;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 background;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
+Button;obj\Debug\90\res\layout\activity_main.xml
 Button;obj\Debug\90\res\layout\activity_note.xml
 cache-path;C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\lp\35\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 color;obj\Debug\90\res\values\colors.xml
@@ -13,6 +16,7 @@ external-path;C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\lp\35\jl\
 foreground;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 foreground;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
 item;obj\Debug\90\res\values\styles.xml
+LinearLayout;obj\Debug\90\res\layout\activity_main.xml
 LinearLayout;obj\Debug\90\res\layout\activity_note.xml
 paths;C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\lp\35\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 RelativeLayout;obj\Debug\90\res\layout\activity_main.xml

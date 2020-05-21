@@ -15,6 +15,7 @@ namespace NoteApp
 
         TextInputEditText title;
         TextInputEditText body;
+        TextInputEditText noteChoice;
 
         protected string MakeFilePath(string title)
         {
@@ -25,9 +26,8 @@ namespace NoteApp
         [Java.Interop.Export("saveNote")]
         public void saveNote(View v)
         {
-            string file = MakeFilePath("FirstNote");//MakeFilePath(title.Text);
+            string file = MakeFilePath(title.Text);
             string contents = body.Text;
-            //
             File.WriteAllText(file, contents);
         }
 
@@ -36,20 +36,30 @@ namespace NoteApp
             if (File.Exists(MakeFilePath(file)))
             {
                 body.Text = File.ReadAllText(MakeFilePath(file));
+                title.Text = file;
             }
         }
+
+        [Java.Interop.Export("LoadNote")]
+        public void LoadNote(View v)
+        {
+            string file = noteChoice.Text;
+            SetContentView(Resource.Layout.activity_note);
+            body = FindViewById<TextInputEditText>(Resource.Id.editBody);
+            title = FindViewById<TextInputEditText>(Resource.Id.editTitle);
+            readNote(file);
+        }
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.activity_note);
+            SetContentView(Resource.Layout.activity_main);
 
-            title = FindViewById<TextInputEditText>(Resource.Id.editTitle);
-            body = FindViewById<TextInputEditText>(Resource.Id.editBody);
+            noteChoice = FindViewById<TextInputEditText>(Resource.Id.NoteChoiceText);
 
-            readNote("FirstNote");
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
