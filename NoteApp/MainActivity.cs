@@ -9,6 +9,8 @@ using Android.Views;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Android.Support.V7.Widget;
+
 
 namespace NoteApp
 {
@@ -62,6 +64,11 @@ namespace NoteApp
         {
             string file = noteChoice.Text;
             SetContentView(Resource.Layout.activity_note);
+
+            var toolBar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbarMain);
+            SetSupportActionBar(toolBar);
+            SupportActionBar.Title = "Notes!";
+
             body = FindViewById<TextInputEditText>(Resource.Id.editBody);
             title = FindViewById<TextInputEditText>(Resource.Id.editTitle);
             readNote(file);
@@ -75,9 +82,19 @@ namespace NoteApp
                 string[] n = File.ReadAllLines(MakeFilePath(NOTELIST));
                 notes = n.ToList();
             }
-            return notes;
+            return CheckForEmptyNotes(notes);
         }
 
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            LaunchMainActivity();
+            return base.OnOptionsItemSelected(item);
+        }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.toolBarMenu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -85,17 +102,23 @@ namespace NoteApp
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             LaunchMainActivity();
-
         }
 
-        private void LaunchMainActivity()
+        [Java.Interop.Export("LaunchMainActivity")]
+        private void LaunchMainActivity(View v = null)
         {
 
             SetContentView(Resource.Layout.activity_main);
+
+            var toolBar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbarMain);
+            SetSupportActionBar(toolBar);
+            SupportActionBar.Title = "Notes!";
+
             rootView = FindViewById<CoordinatorLayout>(Resource.Id.root_view);
             noteChoice = FindViewById<TextInputEditText>(Resource.Id.noteChoiceText);
             noteListView = FindViewById<ListView>(Resource.Id.notesListView);
 
+            if (allNoteNames != null) { allNoteNames.Clear(); }
             allNoteNames = GetAllNotes();
 
             RefreshAdapter();
@@ -106,8 +129,7 @@ namespace NoteApp
 
         private void NoteListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
-            int i = 0;
-            Snackbar.Make(rootView, $"Delete {allNoteNames[e.Position]}?", Snackbar.LengthShort).SetAction("Yes",v => DeleteNote(e.Position)).Show();
+            Snackbar.Make(rootView, $"Delete '{allNoteNames[e.Position]}'?", Snackbar.LengthShort).SetAction("Yes", v => DeleteNote(e.Position)).Show();
         }
 
         private void RefreshAdapter()
@@ -121,12 +143,40 @@ namespace NoteApp
         {
             File.Delete(MakeFilePath(allNoteNames[position]));
             allNoteNames.RemoveAt(position);
+            OverWriteNoteList();
             RefreshAdapter();
+        }
+
+        private List<string> CheckForEmptyNotes(List<string> notes)
+        {
+            var indexToDelete = new List<int>();
+            foreach (var n in notes)
+            {
+                if (n == "")
+                {
+                    indexToDelete.Add(notes.IndexOf(n));
+                }
+            }
+            foreach (var i in indexToDelete)
+            {
+                notes.RemoveAt(i);
+            }
+            return notes;
+        }
+
+        private void OverWriteNoteList()
+        {
+            File.Delete(MakeFilePath(NOTELIST));
+            foreach (var note in allNoteNames)
+            {
+                File.AppendAllText(MakeFilePath(NOTELIST), "\n");
+                File.AppendAllText(MakeFilePath(NOTELIST), note);
+            }
         }
 
         private void noteListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            
+
             string file = allNoteNames[e.Position];
             SetContentView(Resource.Layout.activity_note);
             body = FindViewById<TextInputEditText>(Resource.Id.editBody);
@@ -142,3 +192,4 @@ namespace NoteApp
         }
     }
 }
+

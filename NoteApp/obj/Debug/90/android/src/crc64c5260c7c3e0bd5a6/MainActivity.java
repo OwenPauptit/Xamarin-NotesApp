@@ -12,7 +12,10 @@ public class MainActivity
 		__md_methods = 
 			"n_saveNote:(Landroid/view/View;)V:__export__\n" +
 			"n_LoadNote:(Landroid/view/View;)V:__export__\n" +
+			"n_onOptionsItemSelected:(Landroid/view/MenuItem;)Z:GetOnOptionsItemSelected_Landroid_view_MenuItem_Handler\n" +
+			"n_onCreateOptionsMenu:(Landroid/view/Menu;)Z:GetOnCreateOptionsMenu_Landroid_view_Menu_Handler\n" +
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
+			"n_LaunchMainActivity:(Landroid/view/View;)V:__export__\n" +
 			"n_onRequestPermissionsResult:(I[Ljava/lang/String;[I)V:GetOnRequestPermissionsResult_IarrayLjava_lang_String_arrayIHandler\n" +
 			"";
 		mono.android.Runtime.register ("NoteApp.MainActivity, NoteApp", MainActivity.class, __md_methods);
@@ -43,12 +46,36 @@ public class MainActivity
 	private native void n_LoadNote (android.view.View p0);
 
 
+	public boolean onOptionsItemSelected (android.view.MenuItem p0)
+	{
+		return n_onOptionsItemSelected (p0);
+	}
+
+	private native boolean n_onOptionsItemSelected (android.view.MenuItem p0);
+
+
+	public boolean onCreateOptionsMenu (android.view.Menu p0)
+	{
+		return n_onCreateOptionsMenu (p0);
+	}
+
+	private native boolean n_onCreateOptionsMenu (android.view.Menu p0);
+
+
 	public void onCreate (android.os.Bundle p0)
 	{
 		n_onCreate (p0);
 	}
 
 	private native void n_onCreate (android.os.Bundle p0);
+
+
+	private void LaunchMainActivity (android.view.View p0)
+	{
+		n_LaunchMainActivity (p0);
+	}
+
+	private native void n_LaunchMainActivity (android.view.View p0);
 
 
 	public void onRequestPermissionsResult (int p0, java.lang.String[] p1, int[] p2)
