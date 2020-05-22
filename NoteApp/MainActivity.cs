@@ -15,7 +15,7 @@ namespace NoteApp
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-
+        CoordinatorLayout rootView;
         TextInputEditText title;
         TextInputEditText body;
         TextInputEditText noteChoice;
@@ -92,16 +92,36 @@ namespace NoteApp
         {
 
             SetContentView(Resource.Layout.activity_main);
-
+            rootView = FindViewById<CoordinatorLayout>(Resource.Id.root_view);
             noteChoice = FindViewById<TextInputEditText>(Resource.Id.noteChoiceText);
             noteListView = FindViewById<ListView>(Resource.Id.notesListView);
 
             allNoteNames = GetAllNotes();
 
+            RefreshAdapter();
+
+            noteListView.ItemClick += noteListView_ItemClick;
+            noteListView.ItemLongClick += NoteListView_ItemLongClick;
+        }
+
+        private void NoteListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            int i = 0;
+            Snackbar.Make(rootView, $"Delete {allNoteNames[e.Position]}?", Snackbar.LengthShort).SetAction("Yes",v => DeleteNote(e.Position)).Show();
+        }
+
+        private void RefreshAdapter()
+        {
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, allNoteNames);
 
             noteListView.Adapter = adapter;
-            noteListView.ItemClick += noteListView_ItemClick;
+        }
+
+        private void DeleteNote(int position)
+        {
+            File.Delete(MakeFilePath(allNoteNames[position]));
+            allNoteNames.RemoveAt(position);
+            RefreshAdapter();
         }
 
         private void noteListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

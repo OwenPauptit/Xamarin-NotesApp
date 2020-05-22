@@ -1,5 +1,6 @@
 adaptive-icon;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 adaptive-icon;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
+android.support.design.widget.CoordinatorLayout;obj\Debug\90\res\layout\activity_main.xml
 android.support.design.widget.TextInputEditText;obj\Debug\90\res\layout\activity_main.xml
 android.support.design.widget.TextInputEditText;obj\Debug\90\res\layout\activity_note.xml
 android.support.design.widget.TextInputLayout;obj\Debug\90\res\layout\activity_main.xml
