@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Android.Support.V7.Widget;
-
+using Java.Util.Zip;
 
 namespace NoteApp
 {
@@ -18,21 +18,20 @@ namespace NoteApp
     public class MainActivity : AppCompatActivity
     {
         CoordinatorLayout rootView;
-        TextInputEditText title;
-        TextInputEditText body;
         TextInputEditText noteChoice;
         ListView noteListView;
-        List<string> allNoteNames;
+        public static List<string> allNoteNames;
+        public static string f;
 
         const string NOTELIST = "NoteList";
 
-        public string MakeFilePath(string title)
+        public static string MakeFilePath(string title)
         {
             var fileName = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), (title + ".txt"));
             return fileName;
         }
 
-        [Java.Interop.Export("saveNote")]
+        /*[Java.Interop.Export("saveNote")]
         public void saveNote(View v)
         {
             if (title.Text != NOTELIST)
@@ -57,21 +56,14 @@ namespace NoteApp
                 body.Text = File.ReadAllText(MakeFilePath(file));
             }
             title.Text = file;
-        }
+        }*/
 
         [Java.Interop.Export("LoadNote")]
         public void LoadNote(View v)
         {
-            string file = noteChoice.Text;
-            SetContentView(Resource.Layout.activity_note);
-
-            var toolBar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbarMain);
-            SetSupportActionBar(toolBar);
-            SupportActionBar.Title = "Notes!";
-
-            body = FindViewById<TextInputEditText>(Resource.Id.editBody);
-            title = FindViewById<TextInputEditText>(Resource.Id.editTitle);
-            readNote(file);
+            f = noteChoice.Text;
+            StartActivity(typeof(NoteActivity));
+            
         }
 
         public List<string> GetAllNotes()
@@ -178,18 +170,11 @@ namespace NoteApp
         {
 
             string file = allNoteNames[e.Position];
-            SetContentView(Resource.Layout.activity_note);
-            body = FindViewById<TextInputEditText>(Resource.Id.editBody);
-            title = FindViewById<TextInputEditText>(Resource.Id.editTitle);
-            readNote(file);
+            f = file;
+            StartActivity(typeof(NoteActivity));
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        
     }
 }
 

@@ -287,3 +287,4 @@ C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\res\mipmap-xxxhdpi\base
 C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\res\mipmap-xxxhdpi\baseline_home_black_24.png
 C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\res\mipmap-xxxhdpi\baseline_home_black_36.png
 C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\res\mipmap-xxxhdpi\baseline_home_black_48.png
+C:\Users\owenp\source\repos\NoteApp\NoteApp\obj\Debug\90\android\src\crc64c5260c7c3e0bd5a6\NoteActivity.java
