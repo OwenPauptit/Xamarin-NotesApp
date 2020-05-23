@@ -21,9 +21,9 @@ namespace NoteApp
         TextInputEditText noteChoice;
         ListView noteListView;
         public static List<string> allNoteNames;
-        public static string f;
+        public static string fileToOpen;
 
-        const string NOTELIST = "NoteList";
+        public const string NOTELIST = "NoteList";
 
         public static string MakeFilePath(string title)
         {
@@ -31,37 +31,11 @@ namespace NoteApp
             return fileName;
         }
 
-        /*[Java.Interop.Export("saveNote")]
-        public void saveNote(View v)
-        {
-            if (title.Text != NOTELIST)
-            {
-                string file = MakeFilePath(title.Text);
-                string contents = body.Text;
-                File.WriteAllText(file, contents);
-                if (!allNoteNames.Contains(title.Text))
-                {
-                    allNoteNames.Add(title.Text);
-                    File.AppendAllText(MakeFilePath(NOTELIST), "\n");
-                    File.AppendAllText(MakeFilePath(NOTELIST), title.Text);
-                }
-                LaunchMainActivity();
-            }
-        }
-
-        public void readNote(string file)
-        {
-            if (File.Exists(MakeFilePath(file)))
-            {
-                body.Text = File.ReadAllText(MakeFilePath(file));
-            }
-            title.Text = file;
-        }*/
 
         [Java.Interop.Export("LoadNote")]
         public void LoadNote(View v)
         {
-            f = noteChoice.Text;
+            fileToOpen = noteChoice.Text;
             StartActivity(typeof(NoteActivity));
             
         }
@@ -170,7 +144,7 @@ namespace NoteApp
         {
 
             string file = allNoteNames[e.Position];
-            f = file;
+            fileToOpen = file;
             StartActivity(typeof(NoteActivity));
         }
 

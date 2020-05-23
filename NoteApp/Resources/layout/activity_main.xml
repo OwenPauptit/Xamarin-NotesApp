@@ -37,8 +37,11 @@
     
         <Button
             android:text="Create Note"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:backgroundTint="?android:attr/colorAccent"
+            android:layout_gravity="center"
             android:onClick="LoadNote"
         />
     
