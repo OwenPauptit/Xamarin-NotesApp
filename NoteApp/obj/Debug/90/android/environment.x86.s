@@ -2,8 +2,8 @@
 	.section	.rodata..L.str.1,"aMS",@progbits,1
 	.type	.L.str.1, @object
 .L.str.1:
-	.asciz	"com.companyname.noteapp"
-	.size	.L.str.1, 24
+	.asciz	"com.AeselStudios.Notes"
+	.size	.L.str.1, 23
 	.section	.data.application_config,"aw",@progbits
 	.type	application_config, @object
 	.p2align	2
@@ -68,7 +68,7 @@ mono_aot_mode_name:
 	.section	.rodata..L.str.8,"aMS",@progbits,1
 	.type	.L.str.8, @object
 .L.str.8:
-	.asciz	"f8df45b0-4fda-4aa0-98ed-b6cef8365635"
+	.asciz	"6608e0e8-02a1-4e99-8f79-1cc1f7367b4e"
 	.size	.L.str.8, 37
 	.section	.rodata..L.str.9,"aMS",@progbits,1
 	.type	.L.str.9, @object
